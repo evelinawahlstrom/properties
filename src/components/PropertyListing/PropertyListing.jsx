@@ -29,23 +29,26 @@ const PropertyListing = () => {
     }, []);
 
     if (error) {
-        return 'There is an error, try again later'
-    } 
+        return <p>There was an error: {error.message}, try again later.</p>;
+    }
 
     if (loading) {
-        return 'Loading properties...'
+        return <p>Loading properties...</p>;
     }
 
     return (
-        !!properties && (
+        !!properties ? (
             <ul className="PropertyListing">
-            {properties.map((property, index) => (
+                {properties.map((property, index) => (
                     <li key={index}>
                         <PropertyCard {...property} />
                     </li>
                 ))}
-        </ul>
-    ));
+            </ul>
+        ) : (
+            <p>No properties found</p>
+        )
+    );
 };
 
 export default PropertyListing;
